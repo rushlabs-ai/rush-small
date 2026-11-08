@@ -1,0 +1,46 @@
+{
+  "scifact": {
+    "queries": 300,
+    "BM25": 0.6617,
+    "Qwen3-Reranker-0.6B": 0.7457,
+    "Qwen3-Reranker-0.6B pairs/s": 126,
+    "rush-small-qwen3-reranker-0.6b-v0": 0.741,
+    "rush-small-qwen3-reranker-0.6b-v0 pairs/s": 122,
+    "Qwen3-Reranker-4B": 0.7644,
+    "Qwen3-Reranker-4B pairs/s": 35
+  },
+  "nfcorpus": {
+    "queries": 323,
+    "BM25": 0.3064,
+    "Qwen3-Reranker-0.6B": 0.3545,
+    "Qwen3-Reranker-0.6B pairs/s": 126,
+    "rush-small-qwen3-reranker-0.6b-v0": 0.35,
+    "rush-small-qwen3-reranker-0.6b-v0 pairs/s": 122,
+    "Qwen3-Reranker-4B": 0.3621,
+    "Qwen3-Reranker-4B pairs/s": 36
+  },
+  "fiqa": {
+    "queries": 648,
+    "BM25": 0.2326,
+    "Qwen3-Reranker-0.6B": 0.3671,
+    "Qwen3-Reranker-0.6B pairs/s": 173,
+    "rush-small-qwen3-reranker-0.6b-v0": 0.3968,
+    "rush-small-qwen3-reranker-0.6b-v0 pairs/s": 169
+  },
+  "arguana": {
+    "queries": 1406,
+    "BM25": 0.4843,
+    "Qwen3-Reranker-0.6B": 0.6599,
+    "Qwen3-Reranker-0.6B pairs/s": 112,
+    "rush-small-qwen3-reranker-0.6b-v0": 0.6427,
+    "rush-small-qwen3-reranker-0.6b-v0 pairs/s": 111
+  },
+  "scidocs": {
+    "queries": 1000,
+    "BM25": 0.1538,
+    "Qwen3-Reranker-0.6B": 0.2055,
+    "Qwen3-Reranker-0.6B pairs/s": 167,
+    "rush-small-qwen3-reranker-0.6b-v0": 0.1985,
+    "rush-small-qwen3-reranker-0.6b-v0 pairs/s": 165
+  }
+}

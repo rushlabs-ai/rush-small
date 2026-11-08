@@ -1,0 +1,22 @@
+{
+  "scifact": {
+    "queries": 300,
+    "bm25_ndcg10": 0.6617
+  },
+  "nfcorpus": {
+    "queries": 323,
+    "bm25_ndcg10": 0.3064
+  },
+  "fiqa": {
+    "queries": 648,
+    "bm25_ndcg10": 0.2326
+  },
+  "arguana": {
+    "queries": 1406,
+    "bm25_ndcg10": 0.4843
+  },
+  "scidocs": {
+    "queries": 1000,
+    "bm25_ndcg10": 0.1538
+  }
+}

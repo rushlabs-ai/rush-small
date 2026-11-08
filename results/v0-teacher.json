@@ -1,0 +1,12 @@
+{
+  "train": {
+    "pairs": 192000,
+    "seconds": 1788,
+    "positive_ranked_first": 0.651
+  },
+  "heldout": {
+    "pairs": 4800,
+    "seconds": 47,
+    "positive_ranked_first": 0.63
+  }
+}

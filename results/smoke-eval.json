@@ -1,0 +1,10 @@
+{
+  "scifact": {
+    "queries": 30,
+    "BM25": 0.7396,
+    "Qwen3-Reranker-0.6B": 0.8097,
+    "Qwen3-Reranker-0.6B pairs/s": 132,
+    "rush-small-qwen3-reranker-0.6b-v0": 0.8011,
+    "rush-small-qwen3-reranker-0.6b-v0 pairs/s": 135
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "gguf": "/vol/gguf/rush-small-qwen3-reranker-0.6b-v0-q8_0.gguf",
+  "bytes": 639153152,
+  "rerankd_check": "file:          /vol/gguf/rush-small-qwen3-reranker-0.6b-v0-q8_0.gguf\narchitecture:  qwen3\npooling:       4 (4 = rank)\nrerank head:   true\nrerank prompt: true\nOK: llama-server can serve this as a reranker. Scores: probabilities (0..1).\n",
+  "ok": true
+}

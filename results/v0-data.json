@@ -1,0 +1,6 @@
+{
+  "train_queries": 12000,
+  "heldout": 300,
+  "corpus": 230636,
+  "candidates": 16
+}

@@ -1,0 +1,23 @@
+{
+  "steps": 20,
+  "train_queries": 200,
+  "seconds": 63,
+  "lr": 1e-05,
+  "heldout_before": {
+    "kl": 0.2188,
+    "top1_matches_teacher": 0.867
+  },
+  "heldout_after": {
+    "kl": 0.1681,
+    "top1_matches_teacher": 0.88
+  },
+  "log": [
+    {
+      "step": 20,
+      "loss": 0.2404,
+      "listwise": 0.2003,
+      "lr": 0.0,
+      "elapsed": 48
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+# Exact pins, each release at least 7 days old when chosen.
+torch==2.14.1
+transformers==5.22.1
+pyarrow==26.0.0
+bm25s==0.3.16
