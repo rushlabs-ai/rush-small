@@ -1,0 +1,22 @@
+{
+  "scifact": {
+    "queries": 30,
+    "BM25": 0.6491,
+    "Qwen3-Reranker-0.6B": 0.7297,
+    "Qwen3-Reranker-0.6B pairs/s": 137,
+    "rush-small-qwen3-reranker-0.6b-v1-smoke": 0.754,
+    "rush-small-qwen3-reranker-0.6b-v1-smoke pairs/s": 123
+  },
+  "_summary": {
+    "zero_shot_sets": [
+      "scifact"
+    ],
+    "mean_zero_shot": {
+      "BM25": 0.6491,
+      "Qwen3-Reranker-0.6B": 0.7297,
+      "rush-small-qwen3-reranker-0.6b-v1-smoke": 0.754
+    },
+    "not_zero_shot": [],
+    "max_queries_per_set": 30
+  }
+}

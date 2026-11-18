@@ -1,0 +1,32 @@
+{
+  "train_queries": 47700,
+  "heldout": 300,
+  "candidates": 16,
+  "sources": {
+    "gooaq": {
+      "queries": 16000,
+      "passages_in_pool": 124790,
+      "pairs_available": 3012496
+    },
+    "natural-questions": {
+      "queries": 10000,
+      "passages_in_pool": 75211,
+      "pairs_available": 100226
+    },
+    "hotpotqa": {
+      "queries": 8000,
+      "passages_in_pool": 65500,
+      "pairs_available": 84516
+    },
+    "squad": {
+      "queries": 6000,
+      "passages_in_pool": 18891,
+      "pairs_available": 87599
+    },
+    "pubmedqa": {
+      "queries": 8000,
+      "passages_in_pool": 150053,
+      "pairs_available": 211267
+    }
+  }
+}

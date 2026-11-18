@@ -1,0 +1,54 @@
+{
+  "trec-covid": {
+    "queries": 50,
+    "bm25_ndcg10": 0.5934
+  },
+  "nfcorpus": {
+    "queries": 323,
+    "bm25_ndcg10": 0.3064
+  },
+  "nq": {
+    "queries": 3452,
+    "bm25_ndcg10": 0.2731
+  },
+  "hotpotqa": {
+    "queries": 7405,
+    "bm25_ndcg10": 0.563
+  },
+  "fiqa": {
+    "queries": 648,
+    "bm25_ndcg10": 0.2326
+  },
+  "arguana": {
+    "queries": 1406,
+    "bm25_ndcg10": 0.4843
+  },
+  "webis-touche2020": {
+    "queries": 49,
+    "bm25_ndcg10": 0.3564
+  },
+  "quora": {
+    "queries": 10000,
+    "bm25_ndcg10": 0.7479
+  },
+  "dbpedia-entity": {
+    "queries": 400,
+    "bm25_ndcg10": 0.2699
+  },
+  "scidocs": {
+    "queries": 1000,
+    "bm25_ndcg10": 0.1538
+  },
+  "fever": {
+    "queries": 6666,
+    "bm25_ndcg10": 0.4821
+  },
+  "climate-fever": {
+    "queries": 1535,
+    "bm25_ndcg10": 0.1313
+  },
+  "scifact": {
+    "queries": 300,
+    "bm25_ndcg10": 0.6617
+  }
+}

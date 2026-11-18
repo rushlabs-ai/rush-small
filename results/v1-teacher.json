@@ -1,0 +1,26 @@
+{
+  "train": {
+    "pairs": 763200,
+    "seconds": 11777,
+    "positive_ranked_first": 0.808,
+    "positive_ranked_first_by_source": {
+      "pubmedqa": 0.986,
+      "squad": 0.917,
+      "hotpotqa": 0.861,
+      "gooaq": 0.709,
+      "natural-questions": 0.714
+    }
+  },
+  "heldout": {
+    "pairs": 4800,
+    "seconds": 74,
+    "positive_ranked_first": 0.783,
+    "positive_ranked_first_by_source": {
+      "gooaq": 0.676,
+      "squad": 0.875,
+      "natural-questions": 0.688,
+      "hotpotqa": 0.862,
+      "pubmedqa": 0.977
+    }
+  }
+}
