@@ -54,9 +54,10 @@ and the losses mostly went away.
 
 ## Use
 
-Weights are coming to Hugging Face under [rushlabs-ai](https://huggingface.co/rushlabs-ai). Until
-then the recipe below reproduces them. The model is a drop-in replacement for Qwen3-Reranker-0.6B:
-same prompt format, same yes/no scoring. The GGUF build (q8_0, 639 MB) runs on llama.cpp and
+Weights and GGUF: [rushlabs-ai/rush-small-qwen3-reranker-0.6b-v1](https://huggingface.co/rushlabs-ai/rush-small-qwen3-reranker-0.6b-v1)
+on Hugging Face, with a Transformers example in the model card (`MODEL_CARD.md` here). The publish
+step runs that example against the weights and refuses to upload if it ranks wrongly. The model is a
+drop-in replacement for Qwen3-Reranker-0.6B: same prompt format, same yes/no scoring. The GGUF build (q8_0, 639 MB) runs on llama.cpp and
 Ollama, and passes [rerankd](https://github.com/rushlabs-ai/rerankd)'s `check` (it keeps the
 reranking head and prompt):
 
@@ -78,6 +79,7 @@ rerankd check rush-small-qwen3-reranker-0.6b-v1-q8_0.gguf
 modal run pipeline.py --version v1 --stage all --smoke    # a few cents, end to end
 modal run pipeline.py --version v1 --stage all --steps 2300
 modal run pipeline.py --stage all                         # v0, reproduces the earlier run
+RUSH_SMALL_HF_SECRET=<modal secret with HF_TOKEN> modal run pipeline.py --version v1 --stage publish
 ```
 
 Long stages resume: the teacher writes shards, training saves a checkpoint every 500 steps and

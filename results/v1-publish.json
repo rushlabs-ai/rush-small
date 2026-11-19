@@ -1,0 +1,58 @@
+{
+  "repo": "https://huggingface.co/rushlabs-ai/rush-small-qwen3-reranker-0.6b-v1",
+  "commit": "ffd9bd5735f83a273bb263b73c9b940506d74d08",
+  "example_scores": [
+    0.9961,
+    0.0216
+  ],
+  "files": {
+    ".gitattributes": {
+      "bytes": 1650,
+      "sha256": null
+    },
+    "README.md": {
+      "bytes": 5536,
+      "sha256": null
+    },
+    "chat_template.jinja": {
+      "bytes": 4116,
+      "sha256": null
+    },
+    "config.json": {
+      "bytes": 1416,
+      "sha256": null
+    },
+    "generation_config.json": {
+      "bytes": 214,
+      "sha256": null
+    },
+    "merges.txt": {
+      "bytes": 1671853,
+      "sha256": null
+    },
+    "model.safetensors": {
+      "bytes": 2383141336,
+      "sha256": "4e243c1461903f8ff61e7798e7ee0acdcfaff7fe8598b99879e7ca633b0745d8"
+    },
+    "rush-small-qwen3-reranker-0.6b-v1-q8_0.gguf": {
+      "bytes": 639153152,
+      "sha256": "e76e7bae4accc9acab7809eb0f1f0d20fbb29b81974a2544b5ad6adcd357912a"
+    },
+    "tokenizer.json": {
+      "bytes": 11422654,
+      "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+    },
+    "tokenizer_config.json": {
+      "bytes": 9706,
+      "sha256": null
+    },
+    "training_summary.json": {
+      "bytes": 6579,
+      "sha256": null
+    },
+    "vocab.json": {
+      "bytes": 2776833,
+      "sha256": null
+    }
+  }
+}
