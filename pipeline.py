@@ -1,9 +1,10 @@
-"""Rush Small: distil Qwen3-Reranker-4B into Qwen3-Reranker-0.6B with permissively licensed data.
+"""Rush Small: distil Qwen3-Reranker-4B into Qwen3-Reranker-0.6B with commercially usable data.
 
     modal run pipeline.py --stage all --smoke     # tiny end-to-end check, a few cents
     modal run pipeline.py --stage all             # the real run
     modal run pipeline.py --stage eval            # re-run one stage (data|teacher|train|eval|export)
-    modal run pipeline.py --version v1 --stage all --smoke   # v1: broader permissive data mix, 13 BEIR sets
+    modal run pipeline.py --version v1 --stage all --smoke   # v1: broader data mix, 13 BEIR sets
+    RUSH_SMALL_HF_SECRET=<secret> modal run pipeline.py --version v1 --stage publish   # upload to Hugging Face
 
 Stages, all cached in the Modal Volume "rush-small":
   data     GooAQ (Apache-2.0) questions. Candidates are the true answer + BM25 hard negatives
@@ -79,12 +80,12 @@ RERANKD_SHA256_PINNED = "716b8994110a5f46d67d97aa53fd5dc023f20a34c1face59f973c4a
 
 volume = modal.Volume.from_name("rush-small", create_if_missing=True)
 app = modal.App("rush-small")
-image = (
+base_image = (
     modal.Image.debian_slim(python_version="3.12")
     .pip_install_from_requirements(str(HERE / "requirements.txt"))
     .env({"HF_HOME": "/vol/hf", "TOKENIZERS_PARALLELISM": "false"})
-    .add_local_python_source("common")
 )
+image = base_image.add_local_python_source("common")
 RERANKD_LOCAL = HERE / ".cache" / RERANKD[1]
 
 
@@ -581,6 +582,52 @@ def export(name: str = NAME) -> dict:
             "ok": check.returncode == 0}
 
 
+# -- publish -------------------------------------------------------------------------
+
+HF_ORG = "rushlabs-ai"
+# The Modal Secret that holds HF_TOKEN (a write token for the org). Only attached when publishing,
+# so the other stages run in workspaces that have no such secret. The name is baked into the publish
+# image so the container defines the function exactly as the local side did.
+HF_SECRET = os.environ.get("RUSH_SMALL_HF_SECRET", "")
+publish_image = base_image.env({"RUSH_SMALL_HF_SECRET": HF_SECRET}).add_local_python_source("common")
+
+
+@app.function(image=publish_image, cpu=4, memory=16384, volumes={"/vol": volume}, timeout=3600,
+              secrets=[modal.Secret.from_name(HF_SECRET)] if HF_SECRET else [])
+def publish(name: str, card: str) -> dict:
+    """Upload the weights, the GGUF and the model card to hf.co/rushlabs-ai/<name>. First runs the card's
+    own Transformers example against the saved weights and refuses to publish if it ranks wrongly."""
+    import contextlib
+    import io
+    import re
+
+    from huggingface_hub import CommitOperationAdd, HfApi
+
+    if not os.environ.get("HF_TOKEN"):
+        raise RuntimeError("no HF_TOKEN: set RUSH_SMALL_HF_SECRET to the Modal Secret that holds it")
+    src = V / "models" / name
+    gguf = V / "gguf" / f"{name}-q8_0.gguf"
+    example = re.search(r"```python\n(.*?)```", card, re.S).group(1)
+    example = example.replace(f'"{HF_ORG}/{name}"', f'"{src}"')
+    ns: dict = {}
+    with contextlib.redirect_stdout(io.StringIO()):
+        exec(example, ns)  # our own model card's example, run against our own weights
+    good, bad = ns["rerank"]("what causes tides", ns["docs"])
+    if not good > bad + 0.2:
+        raise RuntimeError(f"model card example ranks wrongly: {good:.3f} vs {bad:.3f}")
+    api = HfApi(token=os.environ["HF_TOKEN"])
+    repo = f"{HF_ORG}/{name}"
+    api.create_repo(repo, repo_type="model", private=False, exist_ok=True)
+    ops = [CommitOperationAdd(path_in_repo=f.name, path_or_fileobj=str(f)) for f in sorted(src.iterdir()) if f.is_file()]
+    ops.append(CommitOperationAdd(path_in_repo=gguf.name, path_or_fileobj=str(gguf)))
+    ops.append(CommitOperationAdd(path_in_repo="README.md", path_or_fileobj=card.encode()))
+    commit = api.create_commit(repo, operations=ops, commit_message=f"{name}: weights, GGUF q8_0 and model card")
+    info = api.model_info(repo, files_metadata=True)
+    return {"repo": f"https://huggingface.co/{repo}", "commit": commit.oid,
+            "example_scores": [round(good, 4), round(bad, 4)],
+            "files": {s.rfilename: {"bytes": s.size, "sha256": s.lfs.sha256 if s.lfs else None} for s in info.siblings}}
+
+
 @app.local_entrypoint()
 def main(stage: str = "all", smoke: bool = False, version: str = "v0", max_queries: int = 0, steps: int = 0) -> None:
     """version v0 reproduces the published run exactly. version v1 is the broader mix (see README).
@@ -634,3 +681,7 @@ def main(stage: str = "all", smoke: bool = False, version: str = "v0", max_queri
         save("eval", merged)
     if stage in ("export", "all"):
         save("export", export.remote(name))
+    if stage == "publish":  # never part of "all": publishing is a deliberate step
+        if smoke:
+            raise SystemExit("publish is for real runs only")
+        save("publish", publish.remote(name, (HERE / "MODEL_CARD.md").read_text()))
