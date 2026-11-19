@@ -36,6 +36,27 @@ class Encoder:
         mid = self.tok("\n<Document>: ", add_special_tokens=False)["input_ids"]
         return self.prefix + head + self._trunc(query, self.max_query) + mid + self._trunc(doc, self.max_doc) + self.suffix
 
+    def encode_many(self, pairs: list[tuple[str, str]], chunk: int = 4096) -> list[list[int]]:
+        """Same ids as encode() for every pair, but tokenises each distinct query and document once,
+        in batches. Per-pair tokenisation was the bottleneck when scoring hundreds of thousands of pairs."""
+        head = self.tok(f"<Instruct>: {INSTRUCT}\n<Query>: ", add_special_tokens=False)["input_ids"]
+        mid = self.tok("\n<Document>: ", add_special_tokens=False)["input_ids"]
+
+        def ids_of(texts: list[str], limit: int) -> dict[str, list[int]]:
+            uniq = list(dict.fromkeys(texts))
+            out: dict[str, list[int]] = {}
+            for i in range(0, len(uniq), chunk):
+                part = uniq[i:i + chunk]
+                toks = self.tok(part, add_special_tokens=False, truncation=True, max_length=limit)["input_ids"]
+                out.update(zip(part, toks))
+            return out
+
+        q_ids = ids_of([q for q, _ in pairs], self.max_query)
+        d_ids = ids_of([d for _, d in pairs], self.max_doc)
+        start = self.prefix + head
+        end = self.suffix
+        return [start + q_ids[q] + mid + d_ids[d] + end for q, d in pairs]
+
 
 def batch_tensors(torch, seqs: list[list[int]], pad: int, device):
     """Left-padded ids and attention mask, so the last position is the answer slot for every row."""
@@ -59,7 +80,7 @@ def forward_scores(torch, model, enc: Encoder, seqs: list[list[int]], device):
 def score_pairs(torch, model, enc: Encoder, pairs: list[tuple[str, str]], device, tokens_per_batch: int = 32768,
                 progress=None) -> list[float]:
     """Scores for many pairs, batched by length to waste little compute on padding."""
-    seqs = [enc.encode(q, d) for q, d in pairs]
+    seqs = enc.encode_many(pairs)
     order = sorted(range(len(seqs)), key=lambda i: len(seqs[i]))
     scores = [0.0] * len(seqs)
     i = 0

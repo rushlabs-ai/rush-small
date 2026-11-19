@@ -1,0 +1,131 @@
+{
+  "trec-covid": {
+    "queries": 50,
+    "BM25": 0.5934,
+    "Qwen3-Reranker-0.6B": 0.8317,
+    "Qwen3-Reranker-0.6B pairs/s": 147,
+    "rush-small-qwen3-reranker-0.6b-v1": 0.8356,
+    "rush-small-qwen3-reranker-0.6b-v1 pairs/s": 146
+  },
+  "nfcorpus": {
+    "queries": 323,
+    "BM25": 0.3064,
+    "Qwen3-Reranker-0.6B": 0.3545,
+    "Qwen3-Reranker-0.6B pairs/s": 138,
+    "rush-small-qwen3-reranker-0.6b-v1": 0.3549,
+    "rush-small-qwen3-reranker-0.6b-v1 pairs/s": 136
+  },
+  "nq": {
+    "queries": 1000,
+    "BM25": 0.273,
+    "Qwen3-Reranker-0.6B": 0.5386,
+    "Qwen3-Reranker-0.6B pairs/s": 273,
+    "rush-small-qwen3-reranker-0.6b-v1": 0.5715,
+    "rush-small-qwen3-reranker-0.6b-v1 pairs/s": 272
+  },
+  "hotpotqa": {
+    "queries": 1000,
+    "BM25": 0.5507,
+    "Qwen3-Reranker-0.6B": 0.7357,
+    "Qwen3-Reranker-0.6B pairs/s": 324,
+    "rush-small-qwen3-reranker-0.6b-v1": 0.7524,
+    "rush-small-qwen3-reranker-0.6b-v1 pairs/s": 319
+  },
+  "fiqa": {
+    "queries": 648,
+    "BM25": 0.2326,
+    "Qwen3-Reranker-0.6B": 0.3671,
+    "Qwen3-Reranker-0.6B pairs/s": 187,
+    "rush-small-qwen3-reranker-0.6b-v1": 0.4,
+    "rush-small-qwen3-reranker-0.6b-v1 pairs/s": 184
+  },
+  "arguana": {
+    "queries": 1000,
+    "BM25": 0.4809,
+    "Qwen3-Reranker-0.6B": 0.6661,
+    "Qwen3-Reranker-0.6B pairs/s": 125,
+    "rush-small-qwen3-reranker-0.6b-v1": 0.6585,
+    "rush-small-qwen3-reranker-0.6b-v1 pairs/s": 123
+  },
+  "webis-touche2020": {
+    "queries": 49,
+    "BM25": 0.3564,
+    "Qwen3-Reranker-0.6B": 0.2724,
+    "Qwen3-Reranker-0.6B pairs/s": 145,
+    "rush-small-qwen3-reranker-0.6b-v1": 0.3385,
+    "rush-small-qwen3-reranker-0.6b-v1 pairs/s": 141
+  },
+  "quora": {
+    "queries": 1000,
+    "BM25": 0.7549,
+    "Qwen3-Reranker-0.6B": 0.8488,
+    "Qwen3-Reranker-0.6B pairs/s": 566,
+    "rush-small-qwen3-reranker-0.6b-v1": 0.8577,
+    "rush-small-qwen3-reranker-0.6b-v1 pairs/s": 554
+  },
+  "dbpedia-entity": {
+    "queries": 400,
+    "BM25": 0.2699,
+    "Qwen3-Reranker-0.6B": 0.3978,
+    "Qwen3-Reranker-0.6B pairs/s": 339,
+    "rush-small-qwen3-reranker-0.6b-v1": 0.4066,
+    "rush-small-qwen3-reranker-0.6b-v1 pairs/s": 334
+  },
+  "scidocs": {
+    "queries": 1000,
+    "BM25": 0.1538,
+    "Qwen3-Reranker-0.6B": 0.2055,
+    "Qwen3-Reranker-0.6B pairs/s": 182,
+    "rush-small-qwen3-reranker-0.6b-v1": 0.2091,
+    "rush-small-qwen3-reranker-0.6b-v1 pairs/s": 179
+  },
+  "fever": {
+    "queries": 1000,
+    "BM25": 0.4845,
+    "Qwen3-Reranker-0.6B": 0.8127,
+    "Qwen3-Reranker-0.6B pairs/s": 259,
+    "rush-small-qwen3-reranker-0.6b-v1": 0.8199,
+    "rush-small-qwen3-reranker-0.6b-v1 pairs/s": 254
+  },
+  "climate-fever": {
+    "queries": 1000,
+    "BM25": 0.1304,
+    "Qwen3-Reranker-0.6B": 0.278,
+    "Qwen3-Reranker-0.6B pairs/s": 203,
+    "rush-small-qwen3-reranker-0.6b-v1": 0.2759,
+    "rush-small-qwen3-reranker-0.6b-v1 pairs/s": 200
+  },
+  "scifact": {
+    "queries": 300,
+    "BM25": 0.6617,
+    "Qwen3-Reranker-0.6B": 0.7457,
+    "Qwen3-Reranker-0.6B pairs/s": 135,
+    "rush-small-qwen3-reranker-0.6b-v1": 0.7573,
+    "rush-small-qwen3-reranker-0.6b-v1 pairs/s": 132
+  },
+  "_summary": {
+    "zero_shot_sets": [
+      "trec-covid",
+      "nfcorpus",
+      "fiqa",
+      "arguana",
+      "webis-touche2020",
+      "quora",
+      "dbpedia-entity",
+      "scidocs",
+      "fever",
+      "climate-fever",
+      "scifact"
+    ],
+    "mean_zero_shot": {
+      "BM25": 0.4023,
+      "Qwen3-Reranker-0.6B": 0.5255,
+      "rush-small-qwen3-reranker-0.6b-v1": 0.5376
+    },
+    "not_zero_shot": [
+      "hotpotqa",
+      "nq"
+    ],
+    "max_queries_per_set": 1000
+  }
+}
